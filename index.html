@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Bộ sưu tập của IEN 📸</title>
+  <link rel="icon" type="image/x-icon" href="./assets/logo.ico" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="nav-logo">IEN 📸</div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/nuhygz" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ienxan_" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@iendichupanh_" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Tốt nghiệp</a></li>
+        <li><a href="#">Nàng thơ</a></li>
+        <li><a href="#">Couple</a></li>
+        <li><a href="#">Sinh nhật</a></li>
+        <li><a href="#">Daily</a></li>
+      </ul>
+    </div>
+  </nav>
+  <h1 class="IENDICHUPANH">IENDICHUPANH🤞📸</h1>
+  <h2 class="gallery-title">Kỷ Yếu Tốt Nghiệp</h2>
+  <div id="gallery-loading" style="text-align: center; margin: 50px 0;">
+    <div class="spinner"></div>
+    <p style="margin-top: 15px; font-size: 16px; color: #555;">Đợi tí nha, đang tải ảnh nè ;)</p>
+  </div>
+  <div id="gallery" class="gallery" style="display: none;"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="image-modal" aria-hidden="true">
+    <div class="modal__content">
+      <span class="modal__close" id="modal-close">&times;</span>
+      <img id="modal-image" src="" alt="Ảnh lớn">
+    </div>
+  </div>
+  <script src="./assets/script.js"></script>
+</body>
+
+</html>
