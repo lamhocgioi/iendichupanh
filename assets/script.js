@@ -1,7 +1,10 @@
 // 📌 1. Cấu hình folderId theo từng album
 const albumFolders = {
   totnghiep: "1ekwV4Em3hYYJd2poJrrRXON9Q9F5pTQ6",
-  nangtho:   "1NF0pDrNcoEaZY-L72jTjjvRBAYKOBB-M", // <- ID mới
+  nangtho:   "1NF0pDrNcoEaZY-L72jTjjvRBAYKOBB-M",
+  couple:   "1Gu7coU0blGlPoOKD5rhBNIbX0geBctfM",
+  sinhnhat: "1rav3R14nehNpkvehpUm4auFmnqSbjyk0",
+  noel: "1PMRxP8sCDS6KhMNEeLJfP6suUewC5l-a",
 };
 
 // 📌 2. Đọc album từ URL
@@ -21,6 +24,8 @@ const titles = {
   totnghiep: "Kỷ Yếu Tốt Nghiệp 🎓",
   nangtho: "Ảnh Nàng Thơ 🌸",
   couple: "Couple 💑",
+  sinhnhat: "Sinh nhật 🎈🎂",
+  noel: "Giáng sinh 🎄"
 };
 
 document.title = `IEN 📸 - ${titles[page] || 'Bộ Sưu Tập'}`;

@@ -34,6 +34,11 @@ body {
   color: #333;
 }
 
+.nav-logo a {
+  text-decoration: none;
+  color: #000;
+}
+
 .social-icons a {
   margin-right: 8px;
   color: #666;
