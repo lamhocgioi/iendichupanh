@@ -1,8 +1,9 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #f0f0f0;
   margin: 0;
 }
+
 
 .navbar {
   background-color: #ffffff;
@@ -74,6 +75,34 @@ h1,
 h2 {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.about-section {
+  display: none;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.about-section h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: auto;
 }
 
 .gallery {
@@ -159,7 +188,8 @@ h2 {
 }
 
 .footer {
-  background-color: #f8f9fa; /* tone sáng, gần với trắng */
+  background-color: #f8f9fa;
+  /* tone sáng, gần với trắng */
   color: #333;
   padding: 30px 20px 15px;
   font-family: 'Segoe UI', sans-serif;
@@ -175,24 +205,28 @@ h2 {
   gap: 30px;
 }
 
-.footer-left, .footer-right {
+.footer-left,
+.footer-right {
   flex: 1;
   min-width: 250px;
 }
 
-.footer-left h3, .footer-right h3 {
+.footer-left h3,
+.footer-right h3 {
   margin-bottom: 15px;
   font-size: 20px;
   color: #000;
 }
 
-.footer-left p, .footer-right p {
+.footer-left p,
+.footer-right p {
   margin: 6px 0;
   font-size: 14px;
   color: #555;
 }
 
-.footer-left i, .footer-right i {
+.footer-left i,
+.footer-right i {
   margin-right: 10px;
 }
 
@@ -284,7 +318,8 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
     text-align: center;
   }
 
-  .footer-left, .footer-right {
+  .footer-left,
+  .footer-right {
     max-width: 100%;
   }
 }
