@@ -1,6 +1,5 @@
 body {
   font-family: sans-serif;
-  padding: 20px;
   background: #f0f0f0;
   margin: 0;
 }
@@ -76,6 +75,7 @@ h2 {
   column-count: 4;
   column-gap: 15px;
   max-width: 1400px;
+  padding: 0 20px;
   margin: auto;
 }
 
@@ -153,6 +153,64 @@ h2 {
   margin: 50px auto;
 }
 
+.footer {
+  background-color: #f8f9fa; /* tone sáng, gần với trắng */
+  color: #333;
+  padding: 30px 20px 15px;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.footer-left, .footer-right {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-left h3, .footer-right h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #000;
+}
+
+.footer-left p, .footer-right p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.footer-left i, .footer-right i {
+  margin-right: 10px;
+}
+
+.footer-social-icons a {
+  margin-right: 12px;
+  font-size: 20px;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
+.footer-social-icons a:hover {
+  color: #007bff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 13px;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px),
 screen and (max-device-width: 768px) and (orientation: portrait) {
@@ -213,6 +271,16 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
   .nav-links li a:hover {
     background: rgba(0, 0, 0, 0.05);
     /* hover nhẹ nhàng */
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-left, .footer-right {
+    max-width: 100%;
   }
 }
 
