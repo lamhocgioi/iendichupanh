@@ -100,7 +100,7 @@ if (!page) {
 
       data.forEach((img, i) => {
         const el = document.createElement("img");
-        el.dataset.src = `https://drive.google.com/thumbnail?id=${img.id}&sz=w2048`;
+        el.dataset.src = `https://drive.google.com/thumbnail?id=${img.id}&sz=w256`;
         el.alt = img.name;
         el.loading = "lazy";
 
