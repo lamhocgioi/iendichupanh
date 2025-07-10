@@ -234,6 +234,14 @@ h2 {
   margin-right: 10px;
 }
 
+.contact-horizontal {
+  display: none;
+}
+
+.contact-vertical {
+  display: block;
+}
+
 .footer-social-icons a {
   margin-right: 12px;
   font-size: 20px;
@@ -257,10 +265,6 @@ h2 {
 /* Responsive */
 @media screen and (max-width: 768px),
 screen and (max-device-width: 768px) and (orientation: portrait) {
-  .IENDICHUPANH {
-    font-size: 45px;
-  }
-
   .gallery-title {
     font-size: 38px;
   }
@@ -325,6 +329,37 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
   .footer-left,
   .footer-right {
     max-width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contact-vertical {
+    display: none;
+  }
+
+  .contact-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    font-size: 14px;
+    color: #555;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .contact-horizontal span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .footer-social-icons a {
+    margin: 0 8px;
+    font-size: 20px;
+    color: #666;
+    transition: color 0.2s ease;
   }
 }
 
