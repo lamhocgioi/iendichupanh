@@ -67,7 +67,7 @@ if (!page) {
 
   function openModal(index) {
     currentIndex = index;
-    const newSrc = `https://drive.google.com/thumbnail?id=${images[index].id}&sz=w2048`;
+    const newSrc = `https://drive.google.com/thumbnail?id=${images[index].id}&sz=w1024`;
 
     modalImage.classList.remove("show");
     modalImage.onload = () => modalImage.classList.add("show");
@@ -113,7 +113,7 @@ if (!page) {
 
       data.forEach((img, i) => {
         const el = document.createElement("img");
-        el.dataset.src = `https://drive.google.com/thumbnail?id=${img.id}&sz=w256`;
+        el.dataset.src = `https://drive.google.com/thumbnail?id=${img.id}&sz=w1024`;
         el.alt = img.name;
         el.loading = "lazy";
 
