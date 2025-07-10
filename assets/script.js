@@ -5,6 +5,7 @@ const albumFolders = {
   couple: "1Gu7coU0blGlPoOKD5rhBNIbX0geBctfM",
   sinhnhat: "1rav3R14nehNpkvehpUm4auFmnqSbjyk0",
   noel: "1PMRxP8sCDS6KhMNEeLJfP6suUewC5l-a",
+  tet: "1IUc0QjYfKOMZozkxvdV_XlXZEJuVkzUj",
 };
 
 // 📌 2. Đọc album từ URL
@@ -35,10 +36,11 @@ if (!page) {
   // 📌 3. Set tiêu đề trang và gallery
   const titles = {
     totnghiep: "Kỷ Yếu Tốt Nghiệp 🎓",
-    nangtho: "Ảnh Nàng Thơ 🌸",
+    nangtho: "Nàng Thơ 🌸",
     couple: "Couple 💑",
     sinhnhat: "Sinh nhật 🎈🎂",
-    noel: "Giáng sinh 🎄"
+    noel: "Giáng sinh 🎄",
+    tet: "Tết 🎆"
   };
 
   document.title = `IEN 📸 - ${titles[page] || 'Bộ Sưu Tập'}`;
