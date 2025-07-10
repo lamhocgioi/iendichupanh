@@ -4,6 +4,10 @@ body {
   margin: 0;
 }
 
+.body-no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
 
 .navbar {
   background-color: #ffffff;

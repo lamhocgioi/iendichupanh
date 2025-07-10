@@ -71,6 +71,17 @@ if (!page) {
     modalImage.onload = () => modalImage.classList.add("show");
     modalImage.src = newSrc;
     modal.classList.add("is-open");
+
+    // 🛑 Chặn cuộn trang chính
+    document.body.classList.add("body-no-scroll");
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modalImage.src = "";
+
+    // ✅ Cho phép cuộn lại
+    document.body.classList.remove("body-no-scroll");
   }
 
   // 📌 5. Lazy load ảnh
