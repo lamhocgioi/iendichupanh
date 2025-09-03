@@ -6,6 +6,9 @@ const albumFolders = {
   sinhnhat: "1rav3R14nehNpkvehpUm4auFmnqSbjyk0",
   noel: "1PMRxP8sCDS6KhMNEeLJfP6suUewC5l-a",
   tet: "1IUc0QjYfKOMZozkxvdV_XlXZEJuVkzUj",
+  ledoclap: "1KoXO6GMLRTzkngIJ9inrKyZgRAwF6RYz",
+  anhcuoi: "1lN1z0NXvzymlRpmQu58wJy5-l-V1ulJu",
+  studio: "1tnsPA_M5s15owfJ1H2q8FVS9kz7pMrpE"
 };
 
 // 📌 2. Đọc album từ URL
@@ -40,7 +43,11 @@ if (!page) {
     couple: "Couple 💑",
     sinhnhat: "Sinh nhật 🎈🎂",
     noel: "Giáng sinh 🎄",
-    tet: "Tết 🎆"
+    tet: "Tết 🎆",
+    ledoclap: "Lễ độc lập 🎉",
+    anhcuoi: "💍 Our Wedding Day",
+    studio: "📸 Album Studio"
+
   };
 
   document.title = `IEN 📸 - ${titles[page] || 'Bộ Sưu Tập'}`;
