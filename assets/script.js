@@ -14,6 +14,9 @@ const albumFolders = {
 // 🔑 Google Drive API Key
 const API_KEY = 'AIzaSyDLe4ETjlC1Rc016_toJWHzYTC45dhzhlw';
 
+// 🆕 Cache để lưu ảnh đã load
+const imageCache = new Map();
+
 // 📌 2. Đọc album từ URL
 const params = new URLSearchParams(window.location.search);
 const page = params.get("page");
@@ -70,41 +73,101 @@ if (!page) {
     if (e.target === modal) closeModal();
   });
 
+  // 🆕 Hàm preload ảnh để cache
+  function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+      if (imageCache.has(url)) {
+        resolve(imageCache.get(url));
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => {
+        imageCache.set(url, img);
+        resolve(img);
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+
+  // 🆕 Preload ảnh modal kế tiếp và trước đó
+  function preloadAdjacentImages(currentIdx) {
+    const nextIdx = (currentIdx + 1) % images.length;
+    const prevIdx = (currentIdx - 1 + images.length) % images.length;
+
+    [nextIdx, prevIdx].forEach(idx => {
+      const file = images[idx];
+      let imageUrl;
+      if (file.thumbnailLink) {
+        imageUrl = file.thumbnailLink.replace(/=s\d+$/, "=s1024");
+      } else if (file.webContentLink) {
+        imageUrl = file.webContentLink;
+      } else {
+        imageUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
+      }
+      
+      // Preload không đợi kết quả
+      preloadImage(imageUrl).catch(() => {});
+    });
+  }
+
   function closeModal() {
     modal.classList.remove("is-open");
     modalImage.src = "";
+    // ✅ Cho phép cuộn lại
+    document.body.classList.remove("body-no-scroll");
   }
 
+  // 🆕 Cải thiện hàm openModal với cache
   function openModal(index) {
     currentIndex = index;
     
     // 🆕 Sử dụng thumbnailLink hoặc fallback về webContentLink
     let imageUrl;
-    if (images[index].thumbnailLink) {
+    const file = images[index];
+    if (file.thumbnailLink) {
       // Thay đổi size thumbnail thành w1024 để có chất lượng cao hơn
-      imageUrl = images[index].thumbnailLink.replace(/=s\d+$/, "=s1024");
-    } else if (images[index].webContentLink) {
-      imageUrl = images[index].webContentLink;
+      imageUrl = file.thumbnailLink.replace(/=s\d+$/, "=s1024");
+    } else if (file.webContentLink) {
+      imageUrl = file.webContentLink;
     } else {
       // Fallback về direct link nếu không có thumbnailLink
-      imageUrl = `https://drive.google.com/uc?export=view&id=${images[index].id}`;
+      imageUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
     }
 
-    modalImage.classList.remove("show");
-    modalImage.onload = () => modalImage.classList.add("show");
-    modalImage.src = imageUrl;
-    modal.classList.add("is-open");
+    // 🆕 Kiểm tra cache trước
+    if (imageCache.has(imageUrl)) {
+      // Nếu đã có trong cache, hiển thị ngay lập tức
+      modalImage.classList.remove("show");
+      modalImage.src = imageCache.get(imageUrl).src;
+      modalImage.classList.add("show");
+      modal.classList.add("is-open");
+      document.body.classList.add("body-no-scroll");
+      
+      // Preload ảnh kế tiếp
+      preloadAdjacentImages(index);
+    } else {
+      // Nếu chưa có trong cache, preload trước khi hiển thị
+      modalImage.classList.remove("show");
+      modal.classList.add("is-open");
+      document.body.classList.add("body-no-scroll");
 
-    // 🛑 Chặn cuộn trang chính
-    document.body.classList.add("body-no-scroll");
-  }
-
-  function closeModal() {
-    modal.classList.remove("is-open");
-    modalImage.src = "";
-
-    // ✅ Cho phép cuộn lại
-    document.body.classList.remove("body-no-scroll");
+      preloadImage(imageUrl)
+        .then(cachedImg => {
+          modalImage.src = cachedImg.src;
+          modalImage.classList.add("show");
+          
+          // Preload ảnh kế tiếp
+          preloadAdjacentImages(index);
+        })
+        .catch(err => {
+          console.error('Failed to load image:', err);
+          // Fallback: load trực tiếp
+          modalImage.onload = () => modalImage.classList.add("show");
+          modalImage.src = imageUrl;
+        });
+    }
   }
 
   // 📌 5. Lazy load ảnh
@@ -161,6 +224,23 @@ if (!page) {
           gallery.appendChild(el);
           observer.observe(el);
         });
+
+        // 🆕 Preload một số ảnh đầu tiên để cache
+        const preloadCount = Math.min(5, images.length);
+        for (let i = 0; i < preloadCount; i++) {
+          const file = images[i];
+          let imageUrl;
+          if (file.thumbnailLink) {
+            imageUrl = file.thumbnailLink.replace(/=s\d+$/, "=s1024");
+          } else if (file.webContentLink) {
+            imageUrl = file.webContentLink;
+          } else {
+            imageUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
+          }
+          
+          // Preload không đợi kết quả
+          preloadImage(imageUrl).catch(() => {});
+        }
       } else {
         // 🆕 Xử lý khi không có ảnh hoặc lỗi quyền truy cập
         gallery.innerHTML = `
