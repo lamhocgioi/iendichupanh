@@ -11,6 +11,9 @@ const albumFolders = {
   studio: "1tnsPA_M5s15owfJ1H2q8FVS9kz7pMrpE"
 };
 
+// 🔑 Google Drive API Key
+const API_KEY = 'AIzaSyDLe4ETjlC1Rc016_toJWHzYTC45dhzhlw';
+
 // 📌 2. Đọc album từ URL
 const params = new URLSearchParams(window.location.search);
 const page = params.get("page");
@@ -34,7 +37,8 @@ if (!page) {
     throw new Error("Album không tồn tại");
   }
 
-  const apiUrl = `https://script.google.com/macros/s/AKfycbzTr7vvOhUI77s1Rn0bv6C1jk1Ubn4n9gRfst_v-NpGzwF9zN718slCMFPpdH0VtYE33Q/exec?folder=${folderId}`;
+  // 🆕 Google Drive API v3 URL thay vì Google Apps Script
+  const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&key=${API_KEY}&fields=files(id,name,thumbnailLink,webContentLink)&orderBy=name`;
 
   // 📌 3. Set tiêu đề trang và gallery
   const titles = {
@@ -47,7 +51,6 @@ if (!page) {
     ledoclap: "Lễ độc lập 🎉",
     anhcuoi: "💍 Our Wedding Day",
     studio: "📸 Album Studio"
-
   };
 
   document.title = `IEN 📸 - ${titles[page] || 'Bộ Sưu Tập'}`;
@@ -74,11 +77,22 @@ if (!page) {
 
   function openModal(index) {
     currentIndex = index;
-    const newSrc = `https://drive.google.com/thumbnail?id=${images[index].id}&sz=w1024`;
+    
+    // 🆕 Sử dụng thumbnailLink hoặc fallback về webContentLink
+    let imageUrl;
+    if (images[index].thumbnailLink) {
+      // Thay đổi size thumbnail thành w1024 để có chất lượng cao hơn
+      imageUrl = images[index].thumbnailLink.replace(/=s\d+$/, "=s1024");
+    } else if (images[index].webContentLink) {
+      imageUrl = images[index].webContentLink;
+    } else {
+      // Fallback về direct link nếu không có thumbnailLink
+      imageUrl = `https://drive.google.com/uc?export=view&id=${images[index].id}`;
+    }
 
     modalImage.classList.remove("show");
     modalImage.onload = () => modalImage.classList.add("show");
-    modalImage.src = newSrc;
+    modalImage.src = imageUrl;
     modal.classList.add("is-open");
 
     // 🛑 Chặn cuộn trang chính
@@ -107,31 +121,86 @@ if (!page) {
     { rootMargin: "200px" }
   );
 
-  // 📌 6. Fetch ảnh từ API
+  // 📌 6. 🆕 Fetch ảnh từ Google Drive API v3
   fetch(apiUrl)
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
     .then((data) => {
-      images = data;
+      console.log('Drive API Response:', data); // Debug log
+      
       const loader = document.getElementById("gallery-loading");
-
       loader.style.display = "none";
       gallery.style.display = "block";
       gallery.innerHTML = "";
 
-      data.forEach((img, i) => {
-        const el = document.createElement("img");
-        el.dataset.src = `https://drive.google.com/thumbnail?id=${img.id}&sz=w1024`;
-        el.alt = img.name;
-        el.loading = "lazy";
+      // 🆕 Xử lý data từ Drive API (khác với Apps Script)
+      if (data.files && data.files.length > 0) {
+        images = data.files;
+        
+        data.files.forEach((file, i) => {
+          const el = document.createElement("img");
+          
+          // 🆕 Sử dụng thumbnailLink với size phù hợp cho gallery
+          let thumbnailUrl;
+          if (file.thumbnailLink) {
+            thumbnailUrl = file.thumbnailLink.replace(/=s\d+$/, "=s400"); // Size nhỏ hơn cho gallery
+          } else {
+            // Fallback nếu không có thumbnailLink
+            thumbnailUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
+          }
+          
+          el.dataset.src = thumbnailUrl;
+          el.alt = file.name;
+          el.loading = "lazy";
 
-        el.addEventListener("click", () => openModal(i));
-        gallery.appendChild(el);
-        observer.observe(el);
-      });
+          el.addEventListener("click", () => openModal(i));
+          gallery.appendChild(el);
+          observer.observe(el);
+        });
+      } else {
+        // 🆕 Xử lý khi không có ảnh hoặc lỗi quyền truy cập
+        gallery.innerHTML = `
+          <div style="text-align: center; padding: 50px; color: #666;">
+            <h3>Không tìm thấy ảnh</h3>
+            <p>Có thể do:</p>
+            <ul style="text-align: left; display: inline-block;">
+              <li>Folder không có ảnh nào</li>
+              <li>Folder chưa được chia sẻ công khai</li>
+              <li>API Key chưa được cấu hình đúng</li>
+              <li>Đã vượt quota Google Drive API</li>
+            </ul>
+          </div>
+        `;
+      }
     })
     .catch((err) => {
-      document.getElementById("gallery-loading").innerText = "Lỗi khi tải ảnh.";
-      console.error(err);
+      console.error('Drive API Error:', err);
+      
+      // 🆕 Xử lý lỗi chi tiết hơn
+      const loader = document.getElementById("gallery-loading");
+      loader.innerHTML = `
+        <div style="color: #e74c3c; text-align: center;">
+          <h3>❌ Lỗi khi tải ảnh</h3>
+          <p><strong>Lỗi:</strong> ${err.message}</p>
+          <div style="margin-top: 20px; font-size: 14px; color: #666;">
+            <p><strong>Các nguyên nhân có thể:</strong></p>
+            <ul style="text-align: left; display: inline-block;">
+              <li>API Key sai hoặc chưa được cấu hình</li>
+              <li>Google Drive API chưa được bật</li>
+              <li>Folder không tồn tại hoặc chưa public</li>
+              <li>Vượt quota API (100 requests/100s/user)</li>
+              <li>CORS issue (chạy từ file:// thay vì http://)</li>
+            </ul>
+            <p style="margin-top: 15px;">
+              <strong>💡 Giải pháp:</strong> Kiểm tra console để xem lỗi chi tiết
+            </p>
+          </div>
+        </div>
+      `;
     });
 
   // 📌 7. Điều hướng phím
@@ -173,6 +242,4 @@ if (!page) {
     if (diff < 0) showNext();
     else showPrev();
   }
-
 }
-
