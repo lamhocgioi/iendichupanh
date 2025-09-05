@@ -158,7 +158,7 @@ h2 {
 }
 
 .modal__content img {
-  min-width: 95vw;
+  max-width: 95vw;
   max-height: 90vh;
   border-radius: 12px;
   object-fit: contain;
@@ -319,6 +319,19 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
     background: rgba(0, 0, 0, 0.05);
     /* hover nhẹ nhàng */
   }
+
+
+  .modal__content img {
+    min-width: 95vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    object-fit: contain;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    margin: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
 
   .footer-container {
     flex-direction: column;
