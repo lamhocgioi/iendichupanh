@@ -1,3 +1,4 @@
+/* ==================== GLOBAL STYLES ==================== */
 body {
   font-family: 'Poppins', sans-serif;
   background: #f0f0f0;
@@ -9,6 +10,13 @@ body {
   height: 100vh;
 }
 
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ==================== NAVIGATION ==================== */
 .navbar {
   background-color: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -44,17 +52,6 @@ body {
   color: #000;
 }
 
-.social-icons a {
-  margin-right: 8px;
-  color: #666;
-  font-size: 16px;
-  transition: color 0.2s ease;
-}
-
-.social-icons a:hover {
-  color: #007bff;
-}
-
 .nav-links {
   list-style: none;
   display: flex;
@@ -75,12 +72,19 @@ body {
   color: #007bff;
 }
 
-h1,
-h2 {
-  text-align: center;
-  margin-bottom: 30px;
+/* Social Icons */
+.social-icons a {
+  margin-right: 8px;
+  color: #666;
+  font-size: 16px;
+  transition: color 0.2s ease;
 }
 
+.social-icons a:hover {
+  color: #007bff;
+}
+
+/* ==================== ABOUT SECTION ==================== */
 .about-section {
   display: none;
   max-width: 800px;
@@ -109,6 +113,7 @@ h2 {
   margin: auto;
 }
 
+/* ==================== GALLERY ==================== */
 .gallery {
   column-count: 4;
   column-gap: 15px;
@@ -131,7 +136,7 @@ h2 {
   transform: scale(1.02);
 }
 
-/* Modal */
+/* ==================== MODAL ==================== */
 .modal {
   display: none;
   position: fixed;
@@ -178,9 +183,193 @@ h2 {
   right: 30px;
   font-size: 32px;
   color: #fff;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);;
   cursor: pointer;
 }
 
+/* ==================== ENHANCED MODAL ==================== */
+.modal-enhanced {
+  backdrop-filter: blur(10px);
+  animation: modalFadeIn 0.3s ease;
+}
+
+/* Navigation buttons */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 15px 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.modal-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.modal-prev {
+  left: 30px;
+}
+
+.modal-next {
+  right: 30px;
+}
+
+/* Enhanced close button */
+.modal-close-enhanced {
+  transition: all 0.3s ease;
+}
+
+.modal-close-enhanced:hover {
+  background: rgba(255, 255, 255, 0);
+  transform: rotate(90deg);
+}
+
+/* Image info bar */
+.modal-info {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+  z-index: 1001;
+  max-width: 80vw;
+}
+
+.modal-counter {
+  font-weight: 600;
+}
+
+.modal-zoom {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.modal-filename {
+  font-weight: 500;
+  opacity: 0.9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.zoom-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.zoom-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Enhanced modal content */
+.modal-content-enhanced {
+  position: relative;
+}
+
+/* Loading state */
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 16px;
+}
+
+.modal-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Error state */
+.modal-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+.modal-retry-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.modal-retry-btn:hover {
+  background: #0056b3;
+}
+
+/* Enhanced image */
+.modal-image {
+  transition: all 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ==================== SPINNER ==================== */
 .spinner {
   border: 6px solid #f3f3f3;
   border-top: 6px solid #3498db;
@@ -191,9 +380,9 @@ h2 {
   margin: 50px auto;
 }
 
+/* ==================== FOOTER ==================== */
 .footer {
   background-color: #f8f9fa;
-  /* tone sáng, gần với trắng */
   color: #333;
   padding: 30px 20px 15px;
   font-family: 'Segoe UI', sans-serif;
@@ -262,7 +451,49 @@ h2 {
   padding-top: 12px;
 }
 
-/* Responsive */
+/* ==================== KEYFRAME ANIMATIONS ==================== */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+
+/* Desktop responsive */
+@media (max-width: 1024px) {
+  .gallery {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    column-count: 1;
+  }
+}
+
+/* Mobile responsive */
 @media screen and (max-width: 768px),
 screen and (max-device-width: 768px) and (orientation: portrait) {
   .gallery-title {
@@ -294,9 +525,7 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
 
   .social-icons a {
     font-size: 24px;
-    /* tăng kích cỡ icon */
     padding: 4px;
-    /* thêm vùng bấm */
   }
 
   .nav-links {
@@ -308,18 +537,14 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
 
   .nav-links li a {
     font-size: 24px;
-    /* to hơn xíu */
     padding: 6px 10px;
-    /* tăng vùng bấm */
     border-radius: 6px;
     transition: background 0.2s ease;
   }
 
   .nav-links li a:hover {
     background: rgba(0, 0, 0, 0.05);
-    /* hover nhẹ nhàng */
   }
-
 
   .modal__content img {
     min-width: 95vw;
@@ -331,7 +556,6 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-
 
   .footer-container {
     flex-direction: column;
@@ -374,35 +598,40 @@ screen and (max-device-width: 768px) and (orientation: portrait) {
     color: #666;
     transition: color 0.2s ease;
   }
-}
 
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+  /* Modal responsive */
+  .modal-nav {
+    font-size: 24px;
+    padding: 12px 15px;
   }
 
-  100% {
-    transform: rotate(360deg);
+  .modal-prev {
+    left: 15px;
   }
-}
 
-
-/* Responsive columns */
-@media (max-width: 1024px) {
-  .gallery {
-    column-count: 3;
+  .modal-next {
+    right: 15px;
   }
-}
 
-@media (max-width: 768px) {
-  .gallery {
-    column-count: 2;
+  .modal__close {
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
   }
-}
 
-@media (max-width: 480px) {
-  .gallery {
-    column-count: 1;
+  .zoom-controls {
+    top: 70px;
+    right: 15px;
+  }
+
+  .modal-info {
+    bottom: 15px;
+    font-size: 13px;
+    padding: 10px 16px;
+    max-width: 90vw;
+  }
+
+  .modal-filename {
+    max-width: 120px;
   }
 }
