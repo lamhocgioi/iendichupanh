@@ -36,6 +36,9 @@ export default function AlbumPage({ folderId, title }: AlbumPageProps) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const observerRef = useRef<IntersectionObserver | null>(null);
 
+    // Thêm state cho hero image
+    const [heroImage, setHeroImage] = useState<DriveFile | null>(null);
+
     // Fetch ảnh từ Google Drive API v3 - giữ nguyên logic từ code cũ
     useEffect(() => {
         const fetchImages = async () => {
@@ -59,6 +62,7 @@ export default function AlbumPage({ folderId, title }: AlbumPageProps) {
 
                 if (data.files && data.files.length > 0) {
                     setImages(data.files);
+                    setHeroImage(data.files[0]);
                 } else {
                     setError('Không tìm thấy ảnh nào trong album này');
                 }
@@ -178,17 +182,39 @@ export default function AlbumPage({ folderId, title }: AlbumPageProps) {
 
             <Navigation />
 
-            {/* Gallery title - giữ nguyên className */}
-            <h2 className="gallery-title">{title}</h2>
+            {/* Album Hero Section */}
+            {!loading && !error && heroImage && (
+                <section className="album-hero">
+                    <div className="album-hero-image">
+                        <img
+                            src={getThumbnailUrl(heroImage).replace('=s400', '=s800')}
+                            alt={title}
+                        />
+                        <div className="album-hero-overlay"></div>
+                    </div>
+                    <div className="album-hero-content">
+                        <span className="album-category">ALBUM</span>
+                        <h1 className="album-title">{title}</h1>
+                        <p className="album-info">{images.length} ảnh</p>
+                    </div>
+                </section>
+            )}
 
-            {/* Conditional rendering dựa trên state */}
+            {/* Gallery Section với header mới */}
+            {!loading && !error && images.length > 0 && (
+                <section className="album-gallery-section">
+                    <div className="section-container">
+                        {renderGallery()}
+                    </div>
+                </section>
+            )}
+
+            {/* Các phần còn lại giữ nguyên */}
             {loading && renderLoading()}
             {error && !loading && renderError()}
-            {!loading && !error && images.length > 0 && renderGallery()}
 
             <Footer />
 
-            {/* Image Modal */}
             <ImageModal
                 isOpen={modalOpen}
                 images={images}

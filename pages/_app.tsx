@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* Hoặc dùng fixed width desktop viewport: */}
         {/* <meta name="viewport" content="width=980, initial-scale=0.44, user-scalable=yes" /> */}
         
-        <meta name="viewport" content="width=980" />
+        {/* <meta name="viewport" content="width=980" /> */}
         <meta name="format-detection" content="telephone=no" />
 
         {/* Font Awesome Icons */}
