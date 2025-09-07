@@ -518,69 +518,167 @@ h2 {
   animation: modalFadeIn 0.3s ease;
 }
 
+/* Navigation Buttons (Prev/Next) */
 .modal-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
   color: white;
-  font-size: 28px;
-  font-weight: bold;
-  padding: 15px 18px;
-  border-radius: 50%;
+  font-size: 32px;
+  font-weight: 300;
+  padding: 20px;
   cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1001;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  width: auto;
+  height: auto;
+  min-width: unset;
+  min-height: unset;
+  border-radius: 0;
 }
 
 .modal-nav:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: translateY(-50%) scale(1.3);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
 }
 
 .modal-nav:active {
-  transform: translateY(-50%) scale(0.95);
+  transform: translateY(-50%) scale(0.98);
+  transition: all 0.15s ease;
 }
 
 .modal-prev {
-  left: 30px;
+  left: 24px;
 }
 
 .modal-next {
-  right: 30px;
+  right: 24px;
 }
 
+/* Close Button */
 .modal-close-enhanced {
-  transition: all 0.3s ease;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 24px;
+  font-weight: 300;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close-enhanced:hover {
-  background: rgba(255, 255, 255, 0);
-  transform: rotate(90deg);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-.modal-info {
+.modal-close-enhanced:active {
+  transform: scale(0.98);
+  transition: all 0.15s ease;
+}
+
+/* Zoom Controls */
+.zoom-controls {
   position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
+  top: 24px;
+  right: 88px; /* Cách close button */
+  display: flex;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.zoom-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 12px 20px;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
+  font-size: 16px;
+  font-weight: 300;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn:active:not(:disabled) {
+  transform: scale(0.95);
+  transition: all 0.15s ease;
+}
+
+.zoom-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Info Bar */
+.modal-info {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
   font-size: 14px;
+  font-weight: 400;
   z-index: 1001;
   max-width: 80vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .modal-counter {
   font-weight: 600;
+  color: #ffffff;
 }
 
 .modal-zoom {
@@ -589,94 +687,67 @@ h2 {
 }
 
 .modal-filename {
-  font-weight: 500;
+  font-weight: 400;
   opacity: 0.9;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
-}
-
-.zoom-controls {
-  position: absolute;
-  top: 80px;
-  right: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 1001;
-}
-
-.zoom-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  width: 40px;
-  height: 40px;
-  transition: all 0.3s ease;
-}
-
-.zoom-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.zoom-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  max-width: 300px;
 }
 
 .modal-content-enhanced {
   position: relative;
 }
 
-.modal-loading {
+/* Loading & Error States */
+.modal-loading,
+.modal-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
+  gap: 20px;
   color: white;
+  text-align: center;
   font-size: 16px;
+  font-weight: 400;
+  z-index: 1002;
+  padding: 40px 20px;
+  max-width: 90vw;
 }
 
 .modal-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid white;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-.modal-error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  color: white;
-  text-align: center;
-  font-size: 16px;
-}
-
 .modal-retry-btn {
-  background: #007bff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.3s ease;
+  font-weight: 500;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .modal-retry-btn:hover {
-  background: #0056b3;
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modal-image {
@@ -685,15 +756,80 @@ h2 {
   -webkit-user-drag: none;
 }
 
-/* ==================== SPINNER ==================== */
-.spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #3498db;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin: 50px auto;
+/* ==================== ALBUM PAGE STYLES ==================== */
+.album-hero {
+  position: relative;
+  height: 50vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.album-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.album-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px) brightness(0.7);
+}
+
+.album-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+}
+
+.album-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.album-category {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.album-title {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0 0 16px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.album-info {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.album-gallery-section {
+  padding: 80px 0;
+}
+
+.gallery-title {
+  display: none; /* Ẩn title cũ vì đã có hero section */
 }
 
 /* ==================== FOOTER ==================== */
@@ -767,6 +903,17 @@ h2 {
   padding-top: 12px;
 }
 
+/* ==================== SPINNER ==================== */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
 /* ==================== OLD ABOUT SECTION (Hidden) ==================== */
 .about-section {
   display: none;
@@ -801,7 +948,6 @@ h2 {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
@@ -812,7 +958,6 @@ h2 {
     opacity: 0;
     backdrop-filter: blur(0px);
   }
-
   to {
     opacity: 1;
     backdrop-filter: blur(10px);
@@ -820,7 +965,59 @@ h2 {
 }
 
 /* ==================== RESPONSIVE STYLES ==================== */
-/* Desktop */
+
+/* Desktop Large (1024px and up) */
+@media (min-width: 1024px) {
+  .modal-nav {
+    font-size: 40px;
+    padding: 24px;
+  }
+  
+  .modal-prev {
+    left: 32px;
+  }
+  
+  .modal-next {
+    right: 32px;
+  }
+  
+  .modal-close-enhanced {
+    top: 32px;
+    right: 32px;
+    font-size: 28px;
+    padding: 16px;
+    border-radius: 16px;
+    min-width: 56px;
+    min-height: 56px;
+  }
+  
+  .zoom-controls {
+    top: 32px;
+    right: 112px;
+    gap: 10px;
+  }
+  
+  .zoom-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  
+  .modal-info {
+    bottom: 32px;
+    padding: 16px 28px;
+    border-radius: 20px;
+    font-size: 15px;
+    gap: 20px;
+  }
+  
+  .modal-filename {
+    max-width: 400px;
+  }
+}
+
+/* Desktop (max-width: 1024px) */
 @media (max-width: 1024px) {
   .gallery {
     column-count: 3;
@@ -840,7 +1037,46 @@ h2 {
   }
 }
 
-/* Tablet */
+/* Tablet (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .modal-nav {
+    font-size: 28px;
+    padding: 16px;
+  }
+
+  .modal-prev {
+    left: 28px;
+  }
+
+  .modal-next {
+    right: 28px;
+  }
+
+  .modal-close-enhanced {
+    top: 28px;
+    right: 28px;
+    font-size: 26px;
+    padding: 14px;
+    border-radius: 14px;
+    min-width: 52px;
+    min-height: 52px;
+  }
+
+  .zoom-controls {
+    top: 28px;
+    right: 96px;
+    gap: 9px;
+  }
+
+  .zoom-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    border-radius: 11px;
+  }
+}
+
+/* Tablet (max-width: 768px) */
 @media (max-width: 768px) {
   .gallery {
     column-count: 3;
@@ -913,45 +1149,8 @@ h2 {
   .section-title {
     font-size: 28px;
   }
-}
 
-/* Mobile */
-@media (max-width: 480px) {
-  .gallery {
-    column-count: 3;
-  }
-
-  .hero-title {
-    font-size: 28px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 12px 24px;
-    font-size: 12px;
-  }
-
-  .work-content,
-  .work-featured .work-content {
-    padding: 20px;
-  }
-
-  .hero-container {
-    padding: 20px;
-  }
-
-  .latest-section {
-    padding: 60px 0;
-  }
-
-  .about-modern {
-    padding: 80px 0;
-  }
-}
-
-/* Mobile Navigation & Footer Responsive */
-@media screen and (max-width: 768px) {
-
+  /* Modal Navigation & Footer Responsive */
   #about,
   #contact {
     scroll-margin-top: 100px;
@@ -1067,122 +1266,7 @@ h2 {
     font-size: 16px;
   }
 
-  /* Modal Responsive */
-  .modal-nav {
-    font-size: 24px;
-    padding: 12px 15px;
-  }
-
-  .modal-prev {
-    left: 15px;
-  }
-
-  .modal-next {
-    right: 15px;
-  }
-
-  .modal__close {
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-  }
-
-  .zoom-controls {
-    top: 70px;
-    right: 15px;
-  }
-
-  .modal-info {
-    bottom: 15px;
-    font-size: 13px;
-    padding: 10px 16px;
-    max-width: 90vw;
-  }
-
-  .modal-filename {
-    max-width: 120px;
-  }
-}
-
-/* ==================== ALBUM PAGE STYLES ==================== */
-.album-hero {
-  position: relative;
-  height: 50vh;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.album-hero-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.album-hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(1px) brightness(0.7);
-}
-
-.album-hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-}
-
-.album-hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-  max-width: 600px;
-  padding: 0 20px;
-}
-
-.album-category {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.9;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.album-title {
-  font-size: 48px;
-  font-weight: 300;
-  line-height: 1.2;
-  margin: 0 0 16px 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.album-info {
-  font-size: 16px;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.album-gallery-section {
-  padding: 80px 0;
-}
-
-.gallery-title {
-  display: none;
-  /* Ẩn title cũ vì đã có hero section */
-}
-
-/* Responsive cho album hero */
-@media (max-width: 768px) {
+  /* Album Responsive */
   .album-hero {
     height: 40vh;
     min-height: 300px;
@@ -1201,7 +1285,138 @@ h2 {
   }
 }
 
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .modal-nav {
+    font-size: 24px;
+    padding: 16px;
+  }
+
+  .modal-prev {
+    left: 16px;
+  }
+
+  .modal-next {
+    right: 16px;
+  }
+
+  .modal-close-enhanced {
+    top: 16px;
+    right: 16px;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    backdrop-filter: blur(15px);
+  }
+
+  .zoom-controls {
+    top: 72px;
+    right: 16px;
+    gap: 6px;
+    flex-direction: column;
+  }
+
+  .zoom-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    border-radius: 8px;
+    backdrop-filter: blur(15px);
+  }
+
+  .modal-info {
+    bottom: 16px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    font-size: 13px;
+    gap: 12px;
+    max-width: calc(100vw - 32px);
+  }
+
+  .modal-filename {
+    max-width: 180px;
+  }
+}
+
+/* Mobile Small (max-width: 480px) */
 @media (max-width: 480px) {
+  .gallery {
+    column-count: 3;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 12px;
+  }
+
+  .work-content,
+  .work-featured .work-content {
+    padding: 20px;
+  }
+
+  .hero-container {
+    padding: 20px;
+  }
+
+  .latest-section {
+    padding: 60px 0;
+  }
+
+  .about-modern {
+    padding: 80px 0;
+  }
+
+  .modal-nav {
+    font-size: 20px;
+    padding: 12px;
+  }
+
+  .modal-prev {
+    left: 12px;
+  }
+
+  .modal-next {
+    right: 12px;
+  }
+
+  .modal-close-enhanced {
+    top: 12px;
+    right: 12px;
+    font-size: 20px;
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .zoom-controls {
+    top: 64px;
+    right: 12px;
+  }
+
+  .zoom-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .modal-info {
+    bottom: 12px;
+    padding: 10px 16px;
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  .modal-filename {
+    max-width: 120px;
+  }
+
   .album-hero {
     height: 35vh;
     min-height: 250px;
