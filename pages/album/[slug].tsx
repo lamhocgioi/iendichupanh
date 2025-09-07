@@ -62,7 +62,20 @@ export default function AlbumPage({ folderId, title }: AlbumPageProps) {
 
                 if (data.files && data.files.length > 0) {
                     setImages(data.files);
-                    setHeroImage(data.files[0]);
+                    // Chọn 1 ảnh ngẫu nhiên
+                    const randIndex = Math.floor(Math.random() * data.files.length);
+                    const chosen = data.files[randIndex];
+
+                    // Lấy URL chất lượng gốc: ưu tiên webContentLink, fallback sang uc?export=view&id=
+                    const originalUrl = chosen.webContentLink
+                        ? chosen.webContentLink
+                        : `https://drive.google.com/uc?export=view&id=${chosen.id}`;
+
+                    // set heroImage: giữ nguyên object file nhưng thêm trường url để render gốc
+                    setHeroImage({
+                        ...chosen,
+                        url: originalUrl,
+                    } as DriveFile & { url: string });
                 } else {
                     setError('Không tìm thấy ảnh nào trong album này');
                 }
