@@ -58,7 +58,7 @@ export default function AlbumPage({ folderId, title }: AlbumPageProps) {
                 }
 
                 const data: DriveApiResponse = await response.json();
-                console.log('Drive API Response:', data); // Debug log
+                // console.log('Drive API Response:', data); // Debug log
 
                 if (data.files && data.files.length > 0) {
                     setImages(data.files);
