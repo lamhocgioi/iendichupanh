@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 // Import CSS
 import '../styles/globals.css';
+import MessengerChat from '@/components/MessengerChat';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
+      <MessengerChat />
     </>
   );
 }
