@@ -8,7 +8,8 @@ export const albumFolders: Record<string, string> = {
   tet: "1IUc0QjYfKOMZozkxvdV_XlXZEJuVkzUj",
   ledoclap: "1KoXO6GMLRTzkngIJ9inrKyZgRAwF6RYz",
   anhcuoi: "1lN1z0NXvzymlRpmQu58wJy5-l-V1ulJu",
-  studio: "1tnsPA_M5s15owfJ1H2q8FVS9kz7pMrpE"
+  studio: "1tnsPA_M5s15owfJ1H2q8FVS9kz7pMrpE",
+  trungthu: "1x8n1krrUjgUqKkpb6Kf6jAJ_sFMzETNV"
 };
 
 // Tiêu đề tương ứng với từng album
@@ -21,7 +22,8 @@ export const albumTitles: Record<string, string> = {
   tet: "Tết 🎆",
   ledoclap: "Lễ độc lập 🎉",
   anhcuoi: "💍 Our Wedding Day",
-  studio: "📸 Album Studio"
+  studio: "📸 Album Studio",
+  trungthu: "Trung Thu 🏮"
 };
 
 // Kiểm tra slug có hợp lệ không

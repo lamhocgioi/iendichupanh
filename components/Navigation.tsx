@@ -31,6 +31,7 @@ const Navigation = () => {
           <li><Link href="/album/ledoclap">Lễ độc lập</Link></li>
           <li><Link href="/album/anhcuoi">Wedding</Link></li>
           <li><Link href="/album/studio">Studio</Link></li>
+          <li><Link href="/album/trungthu">Trung thu</Link></li>
         </ul>
       </div>
     </nav>
